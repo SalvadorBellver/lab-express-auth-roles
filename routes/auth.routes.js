@@ -64,7 +64,10 @@ router.get("/students", isLoggedIn, async (req, res, next) => {
 });
 
 router.get("/student/:studentId", async (req, res, next) => {
+  const { id } = req.session.currentUser;
   const student = await User.findById(req.params.studentId);
+  console.log(req.params.studentId);
+  console.log({ id });
   res.render("students/details", { student });
 });
 
@@ -73,7 +76,12 @@ router.get(
   [isLoggedIn, checkRole(["PM"])],
   async (req, res, next) => {
     const student = await User.findById(req.params.studentId);
-    res.render("students/update-form", { student });
+    res.render("students/update-form", {
+      student,
+      isPM:
+        req.session.currentUser &&
+        ["PM"].includes(req.session.currentUser.roles),
+    });
   }
 );
 
@@ -93,7 +101,7 @@ router.post(
   "/student/:studentId/delete",
   [isLoggedIn, checkRole(["PM"])],
   async (req, res, next) => {
-    const { id } = req.params;
+    const id = req.params.studentId;
     await User.findByIdAndDelete(id);
     res.redirect("/students");
   }
