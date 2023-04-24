@@ -91,7 +91,7 @@ router.post(
 
 router.post(
   "/student/:studentId/delete",
-  isLoggedIn,
+  [isLoggedIn, checkRole(["PM"])],
   async (req, res, next) => {
     const { id } = req.params;
     await User.findByIdAndDelete(id);
