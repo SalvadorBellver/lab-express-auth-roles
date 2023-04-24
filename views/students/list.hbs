@@ -13,5 +13,12 @@
       <button>View student details</button>
     </a>
 
+    {{#if ../isPM}}
+    <a href="/student/{{_id}}/edit">Edit</a>
+<form action="/student/{{_id}}/delete" method="post">
+  <button type="submit">🗑</button>
+</form>
+{{/if}}
+
   {{/each}}
 </div>

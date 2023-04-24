@@ -72,6 +72,19 @@
           ></textarea>
         </div>
 
+        {{#if isPM}}
+          <div class="mb-3">
+            <label for="roleInput" class="form-label">Rol: </label>
+
+            <select name="roles">
+              <option value="dev">DEV</option>
+              <option value="ta">TA</option>
+
+            </select>
+
+          </div>
+        {{/if}}
+
         <div class="d-grid gap-2">
           <button type="submit" class="btn btn-dark block">Completar edición</button>
         </div>

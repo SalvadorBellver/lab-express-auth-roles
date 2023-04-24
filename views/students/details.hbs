@@ -2,6 +2,15 @@
   <h1>username: {{username}}</h1>
   <p>email: {{email}}</p>
   <p>description: {{description}}</p>
+
+  {{#if isPM}}
+    <a href="/student/{{_id}}/edit">Edit</a>
+    <form action="/student/{{_id}}/delete" method="post">
+      <button type="submit">🗑</button>
+    </form>
+  {{/if}}
+
+{{else}}
   <p>Rol: {{roles}}</p>
 
 {{/with}}
